@@ -30,12 +30,14 @@ public class WikiFetcher {
 		Connection conn = Jsoup.connect(url);
 		Document doc = conn.get();
 
-		// select the content text and pull out the paragraphs.
-		Element content = doc.getElementById("mw-content-text");
 
-		// TODO: avoid selecting paragraphs from sidebars and boxouts
-		Elements paras = content.select("p");
-		return paras;
+		// select the content text and pull out the paragraphs.
+		//Element content = doc.getElementById("mw-content-text");
+
+		//avoid selecting paragraphs from sidebars and boxouts
+		Elements paras = doc.select("#mw-content-text > p");
+		Elements links = paras.select("a[href]");
+		return links;
 	}
 
 	/**
